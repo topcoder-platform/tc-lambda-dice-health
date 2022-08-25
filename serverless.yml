@@ -17,9 +17,12 @@ provider:
     DICE_URL: ${file(./config/${self:provider.stage}.json):DICE_URL}
 
 functions:
-  handler:
+  rs256ToHs256:
     handler: lambda.handler
-    name: ${self:provider.stage}-tc-lambda-dice-health # optional, Deployed Lambda name
-    description: DICE health checker # The description of your function.
+    name:  ${self:provider.stage}-tc-lambda-dice-health
     events:
-      - http: ANY /
+      - alb:
+          listenerArn: ${file(./config/${self:provider.stage}.json):ALB_ARN}
+          priority: 150
+          conditions:
+            path: /v5/dice-health
