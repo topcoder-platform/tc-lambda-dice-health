@@ -17,10 +17,12 @@ exports.handler = async (event) => {
     const cacheKey = "dice-health"
     let errorResponse = {
         statusCode: 500,
+        headers: { "content-type": "application/json" },
         body: 'something went wrong.'
     }
     let successResponse = {
         statusCode: 200,
+        headers: { "content-type": "application/json" },
         body: "Bye!"
     }
     const up = "UP"
@@ -54,9 +56,9 @@ exports.handler = async (event) => {
                 status = down
             }
         }
-        successResponse.body = {
+        successResponse.body = JSON.stringify({
             status: status
-        }
+        })
         await redisClient.disconnect()
         return successResponse
     }
