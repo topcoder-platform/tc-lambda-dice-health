@@ -17,7 +17,7 @@ provider:
     DICE_URL: ${file(./config/${self:provider.stage}.json):DICE_URL}
 
 functions:
-  rs256ToHs256:
+  tc-lambda-dice-health:
     handler: lambda.handler
     name:  ${self:provider.stage}-tc-lambda-dice-health
     events:
