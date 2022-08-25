@@ -19,10 +19,11 @@ provider:
 functions:
   tc-lambda-dice-health:
     handler: lambda.handler
-    name:  ${self:provider.stage}-tc-lambda-dice-health
+    name: ${self:provider.stage}-tc-lambda-dice-health
     events:
       - alb:
           listenerArn: ${file(./config/${self:provider.stage}.json):ALB_ARN}
           priority: 150
           conditions:
             path: /v5/dice-health
+      - schedule: rate(1 minutes)

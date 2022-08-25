@@ -54,9 +54,9 @@ exports.handler = async (event) => {
                 status = down
             }
         }
-        successResponse.body = JSON.stringify({
+        successResponse.body = {
             status: status
-        })
+        }
         await redisClient.disconnect()
         return successResponse
     }
