@@ -26,4 +26,4 @@ functions:
           priority: 150
           conditions:
             path: /v5/dice-health
-      - schedule: cron(* * * * ? *)
+      - schedule: cron(0/2 * * * ? *)
